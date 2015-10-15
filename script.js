@@ -103,7 +103,9 @@ $(document).ready(function() {
 
     }
 
-    updateClock();
-    setInterval(updateClock, 1000);
+    if (clock.length) {
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
 
 });

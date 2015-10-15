@@ -7,13 +7,26 @@ body {
     background-color: #ECF0F1;
 }
 
-.container {
+.navbar-default {
+    background-color: transparent;
+}
+
+.main {
     margin-top: 1.5em;
     text-align: center;
 }
 
-#clock {
+.navbar-brand, #clock, h2 {
     font-family: 'PT Mono', "Courier New", monospace;
+}
+
+.navbar-brand {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#clock {
+
     font-size: 6em;
     color: #030816;
     text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
