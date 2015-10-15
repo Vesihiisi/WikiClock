@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Mono);
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background-color: #ECF0F1;
+}
+
+.container {
+    margin-top: 1.5em;
+    text-align: center;
+}
+
+#clock {
+    font-family: 'PT Mono', "Courier New", monospace;
+    font-size: 6em;
+    color: #030816;
+    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+
+.picture {
+    margin-top: 2em;
+}
+
+.photo {
+    border: 10px solid #fff;
+    -webkit-box-shadow: 3px 3px 3px #777;
+    -moz-box-shadow: 3px 3px 3px #777;
+    box-shadow: 3px 3px 3px #777;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .picture img {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .github-fork-ribbon-wrapper {
+        visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #clock {
+        font-size: 5em;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #clock {
+        font-size: 4em;
+    }
+}
