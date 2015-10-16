@@ -10,6 +10,8 @@ $(document).ready(function() {
     function fetchPicture(time) {
         if (prefetchedPicture !== null) {
             displayPicture(prefetchedPicture);
+            $("#picture").prop('title', time);
+            $("#picture").prop('alt', time);
         }
         $.post("getPics.php", {
                 time: time,
@@ -18,6 +20,8 @@ $(document).ready(function() {
                 data = $.parseJSON(data);
                 if (prefetchedPicture === null) {
                     displayPicture(data);
+                    $("#picture").prop('title', time);
+                    $("#picture").prop('alt', time);
                 }
                 $.post("getPics.php", {
                         time: calculateNextMinute(time),
