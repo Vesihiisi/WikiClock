@@ -75,23 +75,38 @@ $(document).ready(function() {
         return newHour + ":" + newMinute;
     }
 
+
+
     function displayPicture(arrayWithTwoUrls) {
         var linkToFullImg = arrayWithTwoUrls[0];
         var thumbnail = arrayWithTwoUrls[1];
-        var picture = createImg(thumbnail, "title");
-        pictureContainer.html(picture);
-        wrapImgInLink(picture, linkToFullImg);
+        var oldPicture = pictureContainer.html();
+        var newPicture = createImg(thumbnail, getTime("noSeconds"));
+        pictureContainer.html(newPicture);
+        wrapImgInLink(newPicture, linkToFullImg);
     }
 
-    function updateClock() {
+    function getTime(option) {
         var currentTime = new Date();
         var currentHours = currentTime.getHours();
         var currentMinutes = currentTime.getMinutes();
         currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
         var currentSeconds = currentTime.getSeconds();
         currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-        var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-        clock.html(currentTimeString);
+        if (option == "withSeconds") {
+            return currentHours + ":" + currentMinutes + ":" + currentSeconds;
+        } else if (option == "noSeconds") {
+            return currentHours + ":" + currentMinutes;
+        }
+
+    }
+
+    function updateClock() {
+        var timeString = getTime("withSeconds");
+        clock.html(timeString);
+        var timeArray = timeString.split(":");
+        var currentHours = timeArray[0];
+        var currentMinutes = timeArray[1];
         if (currentMinutes != savedMinute) {
             savedMinute = currentMinutes;
             var timeToLookUp = currentHours + ":" + savedMinute;
