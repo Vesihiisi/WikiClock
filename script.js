@@ -90,17 +90,16 @@ $(document).ready(function() {
 
     function updateClock() {
         var currentTime = new Date();
+        //var currentHours = currentTime.getHours();
         var currentHours = currentTime.getHours();
         var currentMinutes = currentTime.getMinutes();
+        currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
         var currentSeconds = currentTime.getSeconds();
-        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+        currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
         var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
         clock.html(currentTimeString);
         if (currentMinutes != savedMinute) {
             savedMinute = currentMinutes;
-            currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-            currentHours = (currentHours < 10 ? "0" : "") + currentHours;
             var timeToLookUp = currentHours + ":" + savedMinute;
             fetchPicture(timeToLookUp);
         }
