@@ -49,17 +49,10 @@ function getRandomPicFromCategory($time) {
         $result = array($creditUrl, $thumb["query"]["pages"][$pageid]["imageinfo"][0]["thumburl"]);
         return json_encode($result);
     }
-
 }
 
 $time = $_POST["time"];
 
 $timesToLookUp = getListOfTimesToLookUp($time);
-$result = array();
-foreach ($timesToLookUp as $time) {
-    array_push($result, getRandomPicFromCategory($time));
-}
-
-echo $result[array_rand($result)];
-
-
+$timeToLookUp = $timesToLookUp[array_rand($timesToLookUp)];
+echo getRandomPicFromCategory($timeToLookUp);
