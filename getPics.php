@@ -54,5 +54,9 @@ function getRandomPicFromCategory($time) {
 $time = $_POST["time"];
 
 $timesToLookUp = getListOfTimesToLookUp($time);
-$timeToLookUp = $timesToLookUp[array_rand($timesToLookUp)];
-echo getRandomPicFromCategory($timeToLookUp);
+$result = array();
+foreach ($timesToLookUp as $time) {
+    array_push($result, getRandomPicFromCategory($time));
+}
+
+echo $result[array_rand($result)];
