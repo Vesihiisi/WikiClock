@@ -4,14 +4,27 @@ $(document).ready(function() {
     var savedMinute = null;
     var prefetchedPicture = null;
     var clock = $("#clock");
-    var picture = $("#picture");
+    var pictureContainer = $(".picture-container");
+
+    function createImg(src, title) {
+        var img = $('<img />', {
+            id: 'picture',
+            src: src,
+            alt: title,
+            title: title,
+            class: "img-responsive photo"
+        });
+        return img;
+    }
+
+    function wrapImgInLink(picture, url) {
+        picture.wrap('<a href="' + url + '" target ="_blank"/>');
+    }
 
 
     function fetchPicture(time) {
         if (prefetchedPicture !== null) {
             displayPicture(prefetchedPicture);
-            $("#picture").prop('title', time);
-            $("#picture").prop('alt', time);
         }
         $.post("getPics.php", {
                 time: time,
@@ -20,8 +33,6 @@ $(document).ready(function() {
                 data = $.parseJSON(data);
                 if (prefetchedPicture === null) {
                     displayPicture(data);
-                    $("#picture").prop('title', time);
-                    $("#picture").prop('alt', time);
                 }
                 $.post("getPics.php", {
                         time: calculateNextMinute(time),
@@ -64,38 +75,21 @@ $(document).ready(function() {
         return newHour + ":" + newMinute;
     }
 
-    function clearPicture(element) {
-        element.html("");
-        element.off();
-    }
-
-    function addClickHandler(element, url) {
-        element.click(function() {
-            window.open(url);
-            return false;
-        });
-    }
-
     function displayPicture(arrayWithTwoUrls) {
         var linkToFullImg = arrayWithTwoUrls[0];
         var thumbnail = arrayWithTwoUrls[1];
-        clearPicture(picture);
-        picture.attr("src", thumbnail);
-        $("#link").attr("href", linkToFullImg);
-        addClickHandler(picture, linkToFullImg);
-        if (picture.hasClass("photo")) {} else {
-            picture.addClass("photo");
-        }
+        var picture = createImg(thumbnail, "title");
+        pictureContainer.html(picture);
+        wrapImgInLink(picture, linkToFullImg);
     }
 
     function updateClock() {
         var currentTime = new Date();
-        //var currentHours = currentTime.getHours();
         var currentHours = currentTime.getHours();
         var currentMinutes = currentTime.getMinutes();
-        currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+        currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
         var currentSeconds = currentTime.getSeconds();
-        currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+        currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
         var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
         clock.html(currentTimeString);
         if (currentMinutes != savedMinute) {

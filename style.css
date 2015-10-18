@@ -32,7 +32,7 @@ body {
     text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
 }
 
-.picture {
+.picture-container {
     margin-top: 2em;
 }
 
@@ -47,8 +47,14 @@ body {
     margin: 0 auto;
 }
 
+#loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
 @media only screen and (max-width: 768px) {
-    .picture img {
+    .picture-container img {
         border: none;
         box-shadow: none;
     }
