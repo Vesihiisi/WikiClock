@@ -74,7 +74,7 @@ function getRandomPic($arrayOfPics)
     $pageid = $pic["pageid"];
     $title = str_replace(" ", "_", $pic["title"]);
     $creditUrl = "https://commons.wikimedia.org/wiki/" . $title;
-    $thumbUrl = "https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&iiurlwidth=640&titles=" . $title;
+    $thumbUrl = "https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&iiurlwidth=1000&titles=" . $title;
     $thumb = json_decode(curl($thumbUrl), true);
     $result = array($creditUrl, $thumb["query"]["pages"][$pageid]["imageinfo"][0]["thumburl"]);
     return json_encode($result);
