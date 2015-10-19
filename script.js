@@ -4,21 +4,16 @@ $(document).ready(function() {
     var savedMinute = null;
     var prefetchedPicture = null;
     var clock = $("#clock");
-    var pictureContainer = $(".picture-container");
-
-    function createImg(src, title) {
-        var img = $('<img />', {
-            id: 'picture',
-            src: src,
-            alt: title,
-            title: title,
-            class: "img-responsive photo"
-        });
-        return img;
-    }
+    var picture = $("#picture");
 
     function wrapImgInLink(picture, url) {
-        picture.wrap('<a href="' + url + '" target ="_blank"/>');
+        var link = picture.parent("a");
+        if (link.length) {
+            link.attr("href", url);
+        } else {
+            picture.wrap('<a href="' + url + '" target ="_blank"/>');
+        }
+        
     }
 
 
@@ -80,10 +75,8 @@ $(document).ready(function() {
     function displayPicture(arrayWithTwoUrls) {
         var linkToFullImg = arrayWithTwoUrls[0];
         var thumbnail = arrayWithTwoUrls[1];
-        var oldPicture = pictureContainer.html();
-        var newPicture = createImg(thumbnail, getTime("noSeconds"));
-        pictureContainer.html(newPicture);
-        wrapImgInLink(newPicture, linkToFullImg);
+        picture.attr("src", thumbnail);
+        wrapImgInLink(picture, linkToFullImg);
     }
 
     function getTime(option) {
